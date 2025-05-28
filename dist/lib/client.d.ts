@@ -35,6 +35,7 @@
  * @property {"auto"|"none"|"required"|{type:"function",name:string}} [tool_choice]
  * @property {number} [temperature]
  * @property {number|"inf"} [max_response_output_tokens]
+ * @property {Object} [input_audio_noise_reduction]
  */
 /**
  * @typedef {"in_progress"|"completed"|"incomplete"} ItemStatusType
@@ -265,7 +266,7 @@ export class RealtimeClient extends RealtimeEventHandler {
      * If the client is not yet connected, will save details and instantiate upon connection
      * @param {SessionResourceType} [sessionConfig]
      */
-    updateSession({ modalities, instructions, voice, input_audio_format, output_audio_format, input_audio_transcription, turn_detection, tools, tool_choice, temperature, max_response_output_tokens, }?: SessionResourceType): boolean;
+    updateSession({ modalities, instructions, voice, input_audio_format, output_audio_format, input_audio_transcription, turn_detection, tools, tool_choice, temperature, max_response_output_tokens, input_audio_noise_reduction, }?: SessionResourceType): boolean;
     /**
      * Sends user message content and generates a response
      * @param {Array<InputTextContentType|InputAudioContentType>} content
@@ -349,6 +350,9 @@ export type SessionResourceType = {
     };
     temperature?: number;
     max_response_output_tokens?: number | "inf";
+    input_audio_noise_reduction?: {
+        type: string;
+    };
 };
 export type ItemStatusType = "in_progress" | "completed" | "incomplete";
 export type InputTextContentType = {
